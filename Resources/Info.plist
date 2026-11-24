@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Lintel</string>
+	<key>CFBundleExecutable</key>
+	<string>Lintel</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.sashagilliard.lintel</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Lintel</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.sashagilliard.lintel</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>lintel</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleShortVersionString</key>
+	<string>__VERSION__</string>
+	<key>CFBundleVersion</key>
+	<string>__BUILD__</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>15.0</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>Lintel controls Music and Spotify and finds the browser tab that is playing, so the island can show and control your media.</string>
+	<key>NSAudioCaptureUsageDescription</key>
+	<string>Lintel listens to the playing app's audio to draw the live waveform. Nothing is recorded or stored.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Lintel shows the battery levels of your Bluetooth headphones and speakers in the island.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>Lintel reads your calendars to count down to your next event and list today's and tomorrow's events in the island.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Lintel reads your calendars to count down to your next event and list today's and tomorrow's events in the island.</string>
+	<key>NSFocusStatusUsageDescription</key>
+	<string>Lintel shows when a Focus turns on or off, and keeps the alerts you choose quiet during a Focus.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Lintel uses your approximate location for local weather and to tell you when to leave for events.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Lintel uses your approximate location for local weather and to tell you when to leave for events.</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>© 2026 Sasha Gilliard</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>NSSupportsAutomaticTermination</key>
+	<false/>
+	<key>NSSupportsSuddenTermination</key>
+	<false/>
+</dict>
+</plist>

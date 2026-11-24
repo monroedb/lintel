@@ -1,0 +1,32 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Toolchain
+        run: swift --version
+
+      - name: Build
+        run: swift build
+
+      - name: Logic checks
+        run: swift run lintel-checks
+
+      - name: App bundle (ad-hoc signed)
+        run: |
+          command -v cmake >/dev/null || brew install cmake
+          SIGN_IDENTITY=- ./scripts/build-app.sh

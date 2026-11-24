@@ -1,0 +1,16 @@
+name: Feature request
+description: An idea for Lintel.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: What you'd like Lintel to do, and when you'd use it.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What you do now
+      description: How you handle it today, or other ways to get there.

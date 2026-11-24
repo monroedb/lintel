@@ -1,0 +1,42 @@
+name: Bug report
+description: Something in Lintel doesn't work as expected.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. …
+        2. …
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: e.g. 15.5
+    validations:
+      required: true
+  - type: input
+    id: mac
+    attributes:
+      label: Mac and displays
+      placeholder: e.g. MacBook Pro 14" with a notch, plus an external display
+  - type: input
+    id: version
+    attributes:
+      label: Lintel version or commit
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs (optional)
+      description: >
+        `log show --last 10m --info --predicate 'subsystem == "com.sashagilliard.lintel"'`.
+        Read them for anything personal before you paste them.
+      render: text
