@@ -5,6 +5,12 @@
 </p>
 <p align="center"><sub><a href="docs/demo/lintel-demo.mp4">Download the full-quality video (MP4, 1080p, 38 s)</a></sub></p>
 
+
+
+https://github.com/user-attachments/assets/75e7aef2-ed79-49d8-85b9-a12f3c7a80c7
+
+
+
 Lintel turns the notch of your Mac into a small, interactive island. What's playing, your next
 event, a timer, the volume and brightness, alerts and a shelf for files all sit where the notch is,
 and the island opens into a card when you point at it. On a display without a notch, Lintel shows a
