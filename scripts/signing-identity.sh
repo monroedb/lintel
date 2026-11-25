@@ -1,7 +1,8 @@
 #!/bin/bash
 # Prints the code-signing identity for Lintel builds as "<identity><TAB><description>", where
 # <identity> is the SHA-1 hash to pass to `codesign --sign`, or "-" for ad-hoc. Order:
-#   1. SIGN_IDENTITY: an identity name or SHA-1 hash, or "-" for ad-hoc;
+#   1. SIGN_IDENTITY: an identity name or SHA-1 hash, or "-" for ad-hoc (the identity may be a
+#      self-signed certificate that the keychain doesn't trust: codesign signs with it all the same);
 #   2. the first valid "Apple Development" identity in the keychain (a free Apple ID personal-team
 #      certificate created in Xcode qualifies);
 #   3. ad-hoc, with a warning on stderr.
@@ -16,13 +17,21 @@ identities() {
     | sed -nE 's/^[[:space:]]*[0-9]+\)[[:space:]]+([0-9A-Fa-f]{40})[[:space:]]+"(.*)"$/\1 \2/p'
 }
 
+# The same for every code-signing identity, valid or not (a self-signed certificate isn't trusted,
+# so `find-identity -v` leaves it out; it is listed with a status such as CSSMERR_TP_NOT_TRUSTED).
+all_identities() {
+  { security find-identity -p codesigning 2>/dev/null || true; } \
+    | sed -nE 's/^[[:space:]]*[0-9]+\)[[:space:]]+([0-9A-Fa-f]{40})[[:space:]]+"(.*)"( \([^"]*\))?$/\1 \2/p' \
+    | sort -u
+}
+
 if [ -n "${SIGN_IDENTITY+set}" ]; then
   if [ "$SIGN_IDENTITY" = "-" ]; then
     printf -- '-\tad-hoc (SIGN_IDENTITY=-)\n'
     exit 0
   fi
   # Names start after the 40-character hash and one space.
-  match="$(identities | awk -v want="$SIGN_IDENTITY" \
+  match="$(all_identities | awk -v want="$SIGN_IDENTITY" \
     '{ hash = $1; name = substr($0, 42) } toupper(hash) == toupper(want) || name == want { print; exit }')"
   if [ -z "$match" ]; then
     echo "error: SIGN_IDENTITY \"$SIGN_IDENTITY\" isn't a valid code-signing identity in the keychain." >&2

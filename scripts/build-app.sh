@@ -1,6 +1,7 @@
 #!/bin/bash
 # Builds Lintel.app from the Swift package.
 #   CONFIG=release|debug (default release)
+#   ARCHS="arm64 x86_64" for a universal app (Apple Silicon and Intel); default: this Mac's only
 #   SIGN_IDENTITY=<name or SHA-1>, or "-" for ad-hoc (default: the first Apple Development
 #   identity in the keychain, else ad-hoc; see scripts/signing-identity.sh)
 # Output: build/Lintel.app
@@ -24,8 +25,10 @@ BUILD_NUMBER="$(git -C "$ROOT" rev-list --count HEAD 2>/dev/null || echo 1)"
 OUT="$ROOT/build"
 APP="$OUT/Lintel.app"
 
-swift build -c "$CONFIG" --package-path "$ROOT" --product Lintel
-BIN="$(swift build -c "$CONFIG" --package-path "$ROOT" --show-bin-path)/Lintel"
+ARCH_FLAGS=()
+for ARCH in ${ARCHS:-}; do ARCH_FLAGS+=(--arch "$ARCH"); done
+swift build -c "$CONFIG" --package-path "$ROOT" --product Lintel ${ARCH_FLAGS[@]+"${ARCH_FLAGS[@]}"}
+BIN="$(swift build -c "$CONFIG" --package-path "$ROOT" ${ARCH_FLAGS[@]+"${ARCH_FLAGS[@]}"} --show-bin-path)/Lintel"
 
 mkdir -p "$OUT"
 if [ ! -f "$OUT/AppIcon.icns" ] || [ "$ROOT/scripts/make-icon.swift" -nt "$OUT/AppIcon.icns" ]; then
@@ -36,6 +39,12 @@ fi
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$BIN" "$APP/Contents/MacOS/Lintel"
+if [ "$CONFIG" = release ]; then
+  # The debug map lists the folders the sources were compiled in (a home folder, say); a release
+  # build doesn't need it. Function names stay for crash reports.
+  strip -S "$APP/Contents/MacOS/Lintel"
+fi
+echo "Architectures: $(lipo -archs "$APP/Contents/MacOS/Lintel")" >&2
 sed -e "s/__VERSION__/$VERSION/" -e "s/__BUILD__/$BUILD_NUMBER/" "$ROOT/Resources/Info.plist" > "$APP/Contents/Info.plist"
 cp "$OUT/AppIcon.icns" "$APP/Contents/Resources/AppIcon.icns"
 printf 'APPL????' > "$APP/Contents/PkgInfo"

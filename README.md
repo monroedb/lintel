@@ -5,6 +5,24 @@ event, a timer, the volume and brightness, alerts and a shelf for files all sit 
 and the island opens into a card when you point at it. On a display without a notch, Lintel shows a
 pill at the top of the screen instead.
 
+## Download
+
+**[Download Lintel](https://github.com/monroedb/lintel/releases/latest/download/Lintel.dmg)** for
+macOS 15 or later (Apple Silicon and Intel). Every version, a .zip and the SHA-256 checksums are on
+the [Releases page](https://github.com/monroedb/lintel/releases/latest).
+
+Open the disk image and drag Lintel into Applications. Lintel isn't notarized by Apple, so macOS
+blocks it the first time you open it:
+
+1. Open Lintel. When macOS says it can't verify it, click **Done**.
+2. Open **System Settings › Privacy & Security**, scroll down to **Security** and click **Open
+   Anyway** next to the message about Lintel.
+3. Confirm with **Open Anyway** and your password or Touch ID. Lintel opens, and from then on it
+   opens normally.
+
+Each new version needs Open Anyway once more. Releases are all signed with the same certificate,
+so your settings and permissions carry over when you update.
+
 <p align="center">
   <img src="docs/screenshots/media-player.png" width="49%" alt="The open island playing a track: artwork, title, progress, controls and the output device">
   <img src="docs/screenshots/calendar.png" width="49%" alt="The calendar card: today's and tomorrow's events, with meeting and place details">
@@ -41,7 +59,7 @@ pill at the top of the screen instead.
 
 ## Requirements
 
-- macOS 15 Sequoia or later.
+- macOS 15 Sequoia or later, on Apple Silicon or Intel.
 - A Mac with a notch, or any display: without a notch the island is a pill at the top centre.
 - To build: Xcode (or the Command Line Tools) with Swift 6, and CMake for the bundled media
   adapter (`brew install cmake`).
@@ -78,17 +96,11 @@ from one build to the next. An ad-hoc build counts as a new app every time, so y
 again. If a permission looks on in System Settings but Lintel behaves as if it weren't, remove
 Lintel from that list (−) and add `/Applications/Lintel.app` again (+).
 
-### Opening a downloaded build ("Open Anyway")
-
-A copy you built yourself opens normally. A copy you downloaded that isn't notarized is blocked the
-first time, with a message that macOS can't check it for malicious software. To open it:
-
-1. Open Lintel once, then close the message.
-2. Open System Settings › Privacy & Security, scroll to **Security**, and click **Open Anyway**
-   next to the message about Lintel.
-3. Confirm with your password or Touch ID, then click **Open**.
-
-On macOS 15, Control-clicking the app and choosing Open no longer skips this step.
+Releases on the Releases page are signed with Lintel's own self-signed certificate, "Lintel
+Release", which stays the same from one version to the next. A copy you build yourself has another
+signature, so switching between a download and your own build means granting the permissions again.
+A copy you built yourself opens without the Open Anyway step; on macOS 15 and later, Control-clicking
+a downloaded copy and choosing Open no longer skips it.
 
 ## Permissions
 
@@ -139,7 +151,8 @@ calendars, media, Focus, Shelf items and settings stay on your Mac.
 - External displays change brightness only through BetterDisplay.
 - The blur behind the open card is an approximation: macOS has no public variable blur.
 - Opening and closing the card can drop a frame now and then.
-- Lintel isn't notarized, so a downloaded build needs **Open Anyway** (see above).
+- Lintel isn't notarized, so a downloaded copy needs **Open Anyway** once per version (see
+  [Download](#download)).
 
 ## License
 

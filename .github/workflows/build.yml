@@ -26,7 +26,8 @@ jobs:
       - name: Logic checks
         run: swift run lintel-checks
 
-      - name: App bundle (ad-hoc signed)
+      - name: App bundle (universal, ad-hoc signed)
         run: |
           command -v cmake >/dev/null || brew install cmake
-          SIGN_IDENTITY=- ./scripts/build-app.sh
+          ARCHS="arm64 x86_64" SIGN_IDENTITY=- ./scripts/build-app.sh
+          lipo build/Lintel.app/Contents/MacOS/Lintel -verify_arch arm64 x86_64
