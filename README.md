@@ -2,8 +2,6 @@
 
 <p align="center">
 </p>
-<p align="center"><sub><a href="docs/demo/lintel-demo.mp4">Download the full-quality video (MP4, 1080p, 38 s)</a></sub></p>
-
 https://github.com/user-attachments/assets/2762f321-cbfb-40af-ac4e-b6f18aaa1188
 
 Lintel turns the notch of your Mac into a small, interactive island. What's playing, your next
