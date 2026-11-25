@@ -2,6 +2,7 @@
 
 <p align="center">
 </p>
+
 https://github.com/user-attachments/assets/2762f321-cbfb-40af-ac4e-b6f18aaa1188
 
 Lintel turns the notch of your Mac into a small, interactive island. What's playing, your next
